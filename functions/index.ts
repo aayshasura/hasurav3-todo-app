@@ -4,7 +4,7 @@ const dbConfig = {
   user: "aaysha",
   hostname: "ep-noisy-king-221321.us-west-2.aws.neon.tech",
   port: 5432,
-  password: "password",
+  password: "eZTJ9C1jGFKQ",
   database: "hasura3",
   ssl: true,
   sslmode: "require",
