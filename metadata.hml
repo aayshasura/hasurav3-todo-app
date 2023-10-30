@@ -23,7 +23,7 @@ definition:
         version: 1
         connectionUri:
           uri:
-            value: postgres://aaysha:eZTJ9C1jGFKQ@ep-noisy-king-221321.us-west-2.aws.neon.tech/hasura3
+            value: postgres://aaysha:<password>@ep-noisy-king-221321.us-west-2.aws.neon.tech/hasura3
         metadata:
           tables:
             todos:
