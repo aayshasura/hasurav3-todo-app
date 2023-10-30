@@ -89,7 +89,7 @@ export async function insert_todos(
 
       const result = await client.queryObject({ text: `DELETE FROM todos WHERE id =${todo_id}`})
       if(result.rowCount===1){
-        return `Deleted todo with id=${todo_id} sucesssfully`
+        return `Deleted todo with id= ${todo_id} sucesssfully`
       }else{
         return "Deletion unsucessfull"
       }
