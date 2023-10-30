@@ -23,7 +23,7 @@ definition:
         version: 1
         connectionUri:
           uri:
-            value: postgres://aaysha:<password>@<host>/<db_name>
+            value: postgres://aaysha:eZTJ9C1jGFKQ@ep-noisy-king-221321.us-west-2.aws.neon.tech/hasura3
         metadata:
           tables:
             todos:
@@ -1551,3 +1551,202 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: todos
+  fields:
+    - name: created_at
+      type: timestamp
+    - name: id
+      type: int4
+    - name: todo
+      type: String
+    - name: user_id
+      type: int4
+  graphql:
+    typeName: todos
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: todos
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - todo
+          - user_id
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: users
+  fields:
+    - name: created_at
+      type: timestamptz
+    - name: id
+      type: int4
+    - name: name
+      type: String
+  graphql:
+    typeName: users
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: users
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - name
+
+---
+kind: Model
+version: v1
+definition:
+  name: todos
+  objectType: todos
+  filterableFields:
+    - fieldName: created_at
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: todo
+      operators:
+        enableAll: true
+    - fieldName: user_id
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: created_at
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: todo
+      orderByDirections:
+        enableAll: true
+    - fieldName: user_id
+      orderByDirections:
+        enableAll: true
+  source:
+    dataConnectorName: default
+    collection: todos
+  graphql:
+    selectUniques:
+      - queryRootField: todos_by_id
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: todos
+    filterExpressionType: todos_bool_exp
+    orderByExpressionType: todos_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: todos
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Model
+version: v1
+definition:
+  name: users
+  objectType: users
+  filterableFields:
+    - fieldName: created_at
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: created_at
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  source:
+    dataConnectorName: default
+    collection: users
+  graphql:
+    selectUniques:
+      - queryRootField: users_by_id
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: users
+    filterExpressionType: users_bool_exp
+    orderByExpressionType: users_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: users
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  source: todos
+  target:
+    model:
+      name: users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: user_id
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: todos
+  source: users
+  target:
+    model:
+      name: todos
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: user_id
