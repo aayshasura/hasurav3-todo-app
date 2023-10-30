@@ -1,0 +1,1553 @@
+kind: CompatibilityConfig
+date: 2023-10-19
+---
+kind: AuthConfig
+version: v1
+definition:
+  allowRoleEmulationBy: admin
+  mode:
+    webhook:
+      method: Post
+      url: https://auth.pro.hasura.io/webhook/ddn?role=admin
+
+---
+kind: HasuraHubDataConnector
+version: v1
+definition:
+  name: default
+  connectorId: hasura/postgres
+  connectorConfiguration:
+    - region: gcp-asia-southeast1
+      mode: ReadWrite
+      configuration:
+        version: 1
+        connectionUri:
+          uri:
+            value: postgres://aaysha:eZTJ9C1jGFKQ@ep-noisy-king-221321.us-west-2.aws.neon.tech/hasura3
+        metadata:
+          tables:
+            todos:
+              schemaName: public
+              tableName: todos
+              columns:
+                created_at:
+                  name: created_at
+                  type: timestamp
+                  nullable: nullable
+                  description: null
+                id:
+                  name: id
+                  type: int4
+                  nullable: nonNullable
+                  description: null
+                todo:
+                  name: todo
+                  type: text
+                  nullable: nullable
+                  description: null
+                user_id:
+                  name: user_id
+                  type: int4
+                  nullable: nullable
+                  description: null
+              uniquenessConstraints:
+                todos_pkey:
+                  - id
+              foreignRelations:
+                todos_user_id_fkey:
+                  foreignTable: users
+                  columnMapping:
+                    user_id: id
+              description: null
+            users:
+              schemaName: public
+              tableName: users
+              columns:
+                created_at:
+                  name: created_at
+                  type: timestamptz
+                  nullable: nullable
+                  description: null
+                id:
+                  name: id
+                  type: int4
+                  nullable: nonNullable
+                  description: null
+                name:
+                  name: name
+                  type: text
+                  nullable: nullable
+                  description: null
+              uniquenessConstraints:
+                new_users_pkey:
+                  - id
+              foreignRelations: {}
+              description: null
+          nativeQueries: {}
+          aggregateFunctions:
+            bit:
+              bit_and:
+                returnType: bit
+              bit_or:
+                returnType: bit
+              bit_xor:
+                returnType: bit
+            bool:
+              bool_and:
+                returnType: bool
+              bool_or:
+                returnType: bool
+              every:
+                returnType: bool
+            bpchar:
+              max:
+                returnType: bpchar
+              min:
+                returnType: bpchar
+            date:
+              max:
+                returnType: date
+              min:
+                returnType: date
+            float4:
+              avg:
+                returnType: float8
+              max:
+                returnType: float4
+              min:
+                returnType: float4
+              stddev:
+                returnType: float8
+              stddev_pop:
+                returnType: float8
+              stddev_samp:
+                returnType: float8
+              sum:
+                returnType: float4
+              var_pop:
+                returnType: float8
+              var_samp:
+                returnType: float8
+              variance:
+                returnType: float8
+            float8:
+              avg:
+                returnType: float8
+              max:
+                returnType: float8
+              min:
+                returnType: float8
+              stddev:
+                returnType: float8
+              stddev_pop:
+                returnType: float8
+              stddev_samp:
+                returnType: float8
+              sum:
+                returnType: float8
+              var_pop:
+                returnType: float8
+              var_samp:
+                returnType: float8
+              variance:
+                returnType: float8
+            inet:
+              max:
+                returnType: inet
+              min:
+                returnType: inet
+            int2:
+              avg:
+                returnType: numeric
+              bit_and:
+                returnType: int2
+              bit_or:
+                returnType: int2
+              bit_xor:
+                returnType: int2
+              max:
+                returnType: int2
+              min:
+                returnType: int2
+              stddev:
+                returnType: numeric
+              stddev_pop:
+                returnType: numeric
+              stddev_samp:
+                returnType: numeric
+              sum:
+                returnType: int8
+              var_pop:
+                returnType: numeric
+              var_samp:
+                returnType: numeric
+              variance:
+                returnType: numeric
+            int4:
+              avg:
+                returnType: numeric
+              bit_and:
+                returnType: int4
+              bit_or:
+                returnType: int4
+              bit_xor:
+                returnType: int4
+              max:
+                returnType: int4
+              min:
+                returnType: int4
+              stddev:
+                returnType: numeric
+              stddev_pop:
+                returnType: numeric
+              stddev_samp:
+                returnType: numeric
+              sum:
+                returnType: int8
+              var_pop:
+                returnType: numeric
+              var_samp:
+                returnType: numeric
+              variance:
+                returnType: numeric
+            int8:
+              avg:
+                returnType: numeric
+              bit_and:
+                returnType: int8
+              bit_or:
+                returnType: int8
+              bit_xor:
+                returnType: int8
+              max:
+                returnType: int8
+              min:
+                returnType: int8
+              stddev:
+                returnType: numeric
+              stddev_pop:
+                returnType: numeric
+              stddev_samp:
+                returnType: numeric
+              sum:
+                returnType: numeric
+              var_pop:
+                returnType: numeric
+              var_samp:
+                returnType: numeric
+              variance:
+                returnType: numeric
+            interval:
+              avg:
+                returnType: interval
+              max:
+                returnType: interval
+              min:
+                returnType: interval
+              sum:
+                returnType: interval
+            money:
+              max:
+                returnType: money
+              min:
+                returnType: money
+              sum:
+                returnType: money
+            numeric:
+              avg:
+                returnType: numeric
+              max:
+                returnType: numeric
+              min:
+                returnType: numeric
+              stddev:
+                returnType: numeric
+              stddev_pop:
+                returnType: numeric
+              stddev_samp:
+                returnType: numeric
+              sum:
+                returnType: numeric
+              var_pop:
+                returnType: numeric
+              var_samp:
+                returnType: numeric
+              variance:
+                returnType: numeric
+            oid:
+              max:
+                returnType: oid
+              min:
+                returnType: oid
+            pg_lsn:
+              max:
+                returnType: pg_lsn
+              min:
+                returnType: pg_lsn
+            text:
+              max:
+                returnType: text
+              min:
+                returnType: text
+            tid:
+              max:
+                returnType: tid
+              min:
+                returnType: tid
+            time:
+              max:
+                returnType: time
+              min:
+                returnType: time
+            timestamp:
+              max:
+                returnType: timestamp
+              min:
+                returnType: timestamp
+            timestamptz:
+              max:
+                returnType: timestamptz
+              min:
+                returnType: timestamptz
+            timetz:
+              max:
+                returnType: timetz
+              min:
+                returnType: timetz
+            xml:
+              xmlagg:
+                returnType: xml
+          comparisonOperators:
+            bit:
+              _eq:
+                operatorName: =
+                argumentType: bit
+              _gt:
+                operatorName: ">"
+                argumentType: bit
+              _gte:
+                operatorName: ">="
+                argumentType: bit
+              _lt:
+                operatorName: <
+                argumentType: bit
+              _lte:
+                operatorName: <=
+                argumentType: bit
+              _neq:
+                operatorName: "!="
+                argumentType: bit
+            bool:
+              _eq:
+                operatorName: =
+                argumentType: bool
+              _gt:
+                operatorName: ">"
+                argumentType: bool
+              _gte:
+                operatorName: ">="
+                argumentType: bool
+              _lt:
+                operatorName: <
+                argumentType: bool
+              _lte:
+                operatorName: <=
+                argumentType: bool
+              _neq:
+                operatorName: "!="
+                argumentType: bool
+            bpchar:
+              _eq:
+                operatorName: =
+                argumentType: bpchar
+              _gt:
+                operatorName: ">"
+                argumentType: bpchar
+              _gte:
+                operatorName: ">="
+                argumentType: bpchar
+              _lt:
+                operatorName: <
+                argumentType: bpchar
+              _lte:
+                operatorName: <=
+                argumentType: bpchar
+              _neq:
+                operatorName: "!="
+                argumentType: bpchar
+            date:
+              _eq:
+                operatorName: =
+                argumentType: date
+              _gt:
+                operatorName: ">"
+                argumentType: date
+              _gte:
+                operatorName: ">="
+                argumentType: date
+              _lt:
+                operatorName: <
+                argumentType: date
+              _lte:
+                operatorName: <=
+                argumentType: date
+              _neq:
+                operatorName: "!="
+                argumentType: date
+            float4:
+              _eq:
+                operatorName: =
+                argumentType: float4
+              _gt:
+                operatorName: ">"
+                argumentType: float4
+              _gte:
+                operatorName: ">="
+                argumentType: float4
+              _lt:
+                operatorName: <
+                argumentType: float4
+              _lte:
+                operatorName: <=
+                argumentType: float4
+              _neq:
+                operatorName: "!="
+                argumentType: float4
+            float8:
+              _eq:
+                operatorName: =
+                argumentType: float8
+              _gt:
+                operatorName: ">"
+                argumentType: float8
+              _gte:
+                operatorName: ">="
+                argumentType: float8
+              _lt:
+                operatorName: <
+                argumentType: float8
+              _lte:
+                operatorName: <=
+                argumentType: float8
+              _neq:
+                operatorName: "!="
+                argumentType: float8
+            inet:
+              _eq:
+                operatorName: =
+                argumentType: inet
+              _gt:
+                operatorName: ">"
+                argumentType: inet
+              _gte:
+                operatorName: ">="
+                argumentType: inet
+              _lt:
+                operatorName: <
+                argumentType: inet
+              _lte:
+                operatorName: <=
+                argumentType: inet
+              _neq:
+                operatorName: "!="
+                argumentType: inet
+            int2:
+              _eq:
+                operatorName: =
+                argumentType: int2
+              _gt:
+                operatorName: ">"
+                argumentType: int2
+              _gte:
+                operatorName: ">="
+                argumentType: int2
+              _lt:
+                operatorName: <
+                argumentType: int2
+              _lte:
+                operatorName: <=
+                argumentType: int2
+              _neq:
+                operatorName: "!="
+                argumentType: int2
+            int4:
+              _eq:
+                operatorName: =
+                argumentType: int4
+              _gt:
+                operatorName: ">"
+                argumentType: int4
+              _gte:
+                operatorName: ">="
+                argumentType: int4
+              _lt:
+                operatorName: <
+                argumentType: int4
+              _lte:
+                operatorName: <=
+                argumentType: int4
+              _neq:
+                operatorName: "!="
+                argumentType: int4
+            int8:
+              _eq:
+                operatorName: =
+                argumentType: int8
+              _gt:
+                operatorName: ">"
+                argumentType: int8
+              _gte:
+                operatorName: ">="
+                argumentType: int8
+              _lt:
+                operatorName: <
+                argumentType: int8
+              _lte:
+                operatorName: <=
+                argumentType: int8
+              _neq:
+                operatorName: "!="
+                argumentType: int8
+            interval:
+              _eq:
+                operatorName: =
+                argumentType: interval
+              _gt:
+                operatorName: ">"
+                argumentType: interval
+              _gte:
+                operatorName: ">="
+                argumentType: interval
+              _lt:
+                operatorName: <
+                argumentType: interval
+              _lte:
+                operatorName: <=
+                argumentType: interval
+              _neq:
+                operatorName: "!="
+                argumentType: interval
+            money:
+              _eq:
+                operatorName: =
+                argumentType: money
+              _gt:
+                operatorName: ">"
+                argumentType: money
+              _gte:
+                operatorName: ">="
+                argumentType: money
+              _lt:
+                operatorName: <
+                argumentType: money
+              _lte:
+                operatorName: <=
+                argumentType: money
+              _neq:
+                operatorName: "!="
+                argumentType: money
+            numeric:
+              _eq:
+                operatorName: =
+                argumentType: numeric
+              _gt:
+                operatorName: ">"
+                argumentType: numeric
+              _gte:
+                operatorName: ">="
+                argumentType: numeric
+              _lt:
+                operatorName: <
+                argumentType: numeric
+              _lte:
+                operatorName: <=
+                argumentType: numeric
+              _neq:
+                operatorName: "!="
+                argumentType: numeric
+            oid:
+              _eq:
+                operatorName: =
+                argumentType: oid
+              _gt:
+                operatorName: ">"
+                argumentType: oid
+              _gte:
+                operatorName: ">="
+                argumentType: oid
+              _lt:
+                operatorName: <
+                argumentType: oid
+              _lte:
+                operatorName: <=
+                argumentType: oid
+              _neq:
+                operatorName: "!="
+                argumentType: oid
+            pg_lsn:
+              _eq:
+                operatorName: =
+                argumentType: pg_lsn
+              _gt:
+                operatorName: ">"
+                argumentType: pg_lsn
+              _gte:
+                operatorName: ">="
+                argumentType: pg_lsn
+              _lt:
+                operatorName: <
+                argumentType: pg_lsn
+              _lte:
+                operatorName: <=
+                argumentType: pg_lsn
+              _neq:
+                operatorName: "!="
+                argumentType: pg_lsn
+            text:
+              _eq:
+                operatorName: =
+                argumentType: text
+              _gt:
+                operatorName: ">"
+                argumentType: text
+              _gte:
+                operatorName: ">="
+                argumentType: text
+              _ilike:
+                operatorName: ILIKE
+                argumentType: text
+              _iregex:
+                operatorName: ~*
+                argumentType: text
+              _like:
+                operatorName: LIKE
+                argumentType: text
+              _lt:
+                operatorName: <
+                argumentType: text
+              _lte:
+                operatorName: <=
+                argumentType: text
+              _neq:
+                operatorName: "!="
+                argumentType: text
+              _nilike:
+                operatorName: NOT ILIKE
+                argumentType: text
+              _niregex:
+                operatorName: "!~*"
+                argumentType: text
+              _nlike:
+                operatorName: NOT LIKE
+                argumentType: text
+              _nregex:
+                operatorName: "!~"
+                argumentType: text
+              _nsimilar:
+                operatorName: NOT SIMILAR TO
+                argumentType: text
+              _regex:
+                operatorName: "~"
+                argumentType: text
+              _similar:
+                operatorName: SIMILAR TO
+                argumentType: text
+            tid:
+              _eq:
+                operatorName: =
+                argumentType: tid
+              _gt:
+                operatorName: ">"
+                argumentType: tid
+              _gte:
+                operatorName: ">="
+                argumentType: tid
+              _lt:
+                operatorName: <
+                argumentType: tid
+              _lte:
+                operatorName: <=
+                argumentType: tid
+              _neq:
+                operatorName: "!="
+                argumentType: tid
+            time:
+              _eq:
+                operatorName: =
+                argumentType: time
+              _gt:
+                operatorName: ">"
+                argumentType: time
+              _gte:
+                operatorName: ">="
+                argumentType: time
+              _lt:
+                operatorName: <
+                argumentType: time
+              _lte:
+                operatorName: <=
+                argumentType: time
+              _neq:
+                operatorName: "!="
+                argumentType: time
+            timestamp:
+              _eq:
+                operatorName: =
+                argumentType: timestamp
+              _gt:
+                operatorName: ">"
+                argumentType: timestamp
+              _gte:
+                operatorName: ">="
+                argumentType: timestamp
+              _lt:
+                operatorName: <
+                argumentType: timestamp
+              _lte:
+                operatorName: <=
+                argumentType: timestamp
+              _neq:
+                operatorName: "!="
+                argumentType: timestamp
+            timestamptz:
+              _eq:
+                operatorName: =
+                argumentType: timestamptz
+              _gt:
+                operatorName: ">"
+                argumentType: timestamptz
+              _gte:
+                operatorName: ">="
+                argumentType: timestamptz
+              _lt:
+                operatorName: <
+                argumentType: timestamptz
+              _lte:
+                operatorName: <=
+                argumentType: timestamptz
+              _neq:
+                operatorName: "!="
+                argumentType: timestamptz
+            timetz:
+              _eq:
+                operatorName: =
+                argumentType: timetz
+              _gt:
+                operatorName: ">"
+                argumentType: timetz
+              _gte:
+                operatorName: ">="
+                argumentType: timetz
+              _lt:
+                operatorName: <
+                argumentType: timetz
+              _lte:
+                operatorName: <=
+                argumentType: timetz
+              _neq:
+                operatorName: "!="
+                argumentType: timetz
+            xml:
+              _eq:
+                operatorName: =
+                argumentType: xml
+              _gt:
+                operatorName: ">"
+                argumentType: xml
+              _gte:
+                operatorName: ">="
+                argumentType: xml
+              _lt:
+                operatorName: <
+                argumentType: xml
+              _lte:
+                operatorName: <=
+                argumentType: xml
+              _neq:
+                operatorName: "!="
+                argumentType: xml
+        excludedSchemas:
+          - information_schema
+          - pg_catalog
+          - tiger
+          - crdb_internal
+          - columnar
+          - columnar_internal
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: bit
+  graphql:
+    typeName: bit
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: bit
+  representation: bit
+  graphql:
+    comparisonExpressionTypeName: default_bit_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: bool
+  graphql:
+    typeName: bool
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: bool
+  representation: bool
+  graphql:
+    comparisonExpressionTypeName: default_bool_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: bpchar
+  graphql:
+    typeName: bpchar
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: bpchar
+  representation: bpchar
+  graphql:
+    comparisonExpressionTypeName: default_bpchar_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: date
+  graphql:
+    typeName: date
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: date
+  representation: date
+  graphql:
+    comparisonExpressionTypeName: default_date_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: float4
+  graphql:
+    typeName: float4
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: float4
+  representation: float4
+  graphql:
+    comparisonExpressionTypeName: default_float4_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: float8
+  graphql:
+    typeName: float8
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: float8
+  representation: float8
+  graphql:
+    comparisonExpressionTypeName: default_float8_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: inet
+  graphql:
+    typeName: inet
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: inet
+  representation: inet
+  graphql:
+    comparisonExpressionTypeName: default_inet_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: int2
+  graphql:
+    typeName: int2
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: int2
+  representation: int2
+  graphql:
+    comparisonExpressionTypeName: default_int2_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: int4
+  graphql:
+    typeName: int4
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: int4
+  representation: int4
+  graphql:
+    comparisonExpressionTypeName: default_int4_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: int8
+  graphql:
+    typeName: int8
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: int8
+  representation: int8
+  graphql:
+    comparisonExpressionTypeName: default_int8_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: interval
+  graphql:
+    typeName: interval
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: interval
+  representation: interval
+  graphql:
+    comparisonExpressionTypeName: default_interval_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: money
+  graphql:
+    typeName: money
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: money
+  representation: money
+  graphql:
+    comparisonExpressionTypeName: default_money_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: numeric
+  graphql:
+    typeName: numeric
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: numeric
+  representation: numeric
+  graphql:
+    comparisonExpressionTypeName: default_numeric_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: oid
+  graphql:
+    typeName: oid
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: oid
+  representation: oid
+  graphql:
+    comparisonExpressionTypeName: default_oid_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: pg_lsn
+  graphql:
+    typeName: pg_lsn
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: pg_lsn
+  representation: pg_lsn
+  graphql:
+    comparisonExpressionTypeName: default_pg_lsn_comparison_exp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: text
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: default_text_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: tid
+  graphql:
+    typeName: tid
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: tid
+  representation: tid
+  graphql:
+    comparisonExpressionTypeName: default_tid_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: time
+  graphql:
+    typeName: time
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: time
+  representation: time
+  graphql:
+    comparisonExpressionTypeName: default_time_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: timestamp
+  graphql:
+    typeName: timestamp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: timestamp
+  representation: timestamp
+  graphql:
+    comparisonExpressionTypeName: default_timestamp_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: timestamptz
+  graphql:
+    typeName: timestamptz
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: timestamptz
+  representation: timestamptz
+  graphql:
+    comparisonExpressionTypeName: default_timestamptz_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: timetz
+  graphql:
+    typeName: timetz
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: timetz
+  representation: timetz
+  graphql:
+    comparisonExpressionTypeName: default_timetz_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: xml
+  graphql:
+    typeName: xml
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: default
+  dataConnectorScalarType: xml
+  representation: xml
+  graphql:
+    comparisonExpressionTypeName: default_xml_comparison_exp
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: todos
+  fields:
+    - name: created_at
+      type: timestamp
+    - name: id
+      type: int4
+    - name: todo
+      type: String
+    - name: user_id
+      type: int4
+  graphql:
+    typeName: todos
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: todos
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - todo
+          - user_id
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: users
+  fields:
+    - name: created_at
+      type: timestamptz
+    - name: id
+      type: int4
+    - name: name
+      type: String
+  graphql:
+    typeName: users
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: users
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - created_at
+          - id
+          - name
+
+---
+kind: Model
+version: v1
+definition:
+  name: todos
+  objectType: todos
+  filterableFields:
+    - fieldName: created_at
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: todo
+      operators:
+        enableAll: true
+    - fieldName: user_id
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: created_at
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: todo
+      orderByDirections:
+        enableAll: true
+    - fieldName: user_id
+      orderByDirections:
+        enableAll: true
+  source:
+    dataConnectorName: default
+    collection: todos
+  graphql:
+    selectUniques:
+      - queryRootField: todos_by_id
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: todos
+    filterExpressionType: todos_bool_exp
+    orderByExpressionType: todos_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: todos
+  permissions:
+    - role: admin
+      select:
+        filter: null
+    - role: user
+      select:
+        filter: 
+          fieldComparison:
+            field: user_id
+            operator: _eq
+            value:
+              sessionVariable: x-hasura-user-id
+           
+---
+kind: Model
+version: v1
+definition:
+  name: users
+  objectType: users
+  filterableFields:
+    - fieldName: created_at
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: created_at
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  source:
+    dataConnectorName: default
+    collection: users
+  graphql:
+    selectUniques:
+      - queryRootField: users_by_id
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: users
+    filterExpressionType: users_bool_exp
+    orderByExpressionType: users_order_by
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: users
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  source: todos
+  target:
+    model:
+      name: users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: user_id
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: todos
+  source: users
+  target:
+    model:
+      name: todos
+      relationshipType: Array
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: user_id
+---
+kind: DataConnector
+version: v1
+definition:
+  name: ts_connector
+  url:
+
+    singleUrl: http://asia-south1-a-001.secure-connect.cloud.internal:2007
+  schema:
+    scalar_types:
+      insert_user_output:
+        aggregate_functions: {}
+        comparison_operators: {}
+        update_operators: {}
+      String:
+        aggregate_functions: {}
+        comparison_operators: {}
+        update_operators: {}
+      insert_todos_output:
+        aggregate_functions: {}
+        comparison_operators: {}
+        update_operators: {}
+    object_types: {}
+    collections: []
+    functions: []
+    procedures:
+      - name: insert_user
+        arguments:
+          user_name:
+            type:
+              type: named
+              name: String
+        result_type:
+          type: named
+          name: insert_user_output
+      - name: insert_todos
+        arguments:
+          user_id:
+            type:
+              type: named
+              name: String
+          todo:
+            type:
+              type: named
+              name: String
+        result_type:
+          type: named
+          name: insert_todos_output
+      - name: delete_todos
+        arguments:
+          todo_id:
+            type:
+              type: named
+              name: String
+        result_type:
+          type: named
+          name: String
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: insert_user_output
+  graphql:
+    typeName: insert_user_output
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: ts_connector
+  dataConnectorScalarType: insert_user_output
+  representation: insert_user_output
+  graphql:
+    comparisonExpressionTypeName: ts_connector_insert_user_output_comparison_exp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: ts_connector
+  dataConnectorScalarType: String
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: ts_connector_String_comparison_exp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: insert_todos_output
+  graphql:
+    typeName: insert_todos_output
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: ts_connector
+  dataConnectorScalarType: insert_todos_output
+  representation: insert_todos_output
+  graphql:
+    comparisonExpressionTypeName: ts_connector_insert_todos_output_comparison_exp
+
+---
+kind: Command
+version: v1
+definition:
+  name: insert_user
+  arguments:
+    - name: user_name
+      type: String
+  outputType: insert_user_output
+  source:
+    dataConnectorName: ts_connector
+    dataConnectorCommand:
+      procedure: insert_user
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: insert_user
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: insert_user
+  permissions:
+    - role: admin
+      allowExecution: true
+
+---
+kind: Command
+version: v1
+definition:
+  name: insert_todos
+  arguments:
+    - name: user_id
+      type: String
+    - name: todo
+      type: String
+  outputType: insert_todos_output
+  source:
+    dataConnectorName: ts_connector
+    dataConnectorCommand:
+      procedure: insert_todos
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: insert_todos
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: insert_todos
+  permissions:
+    - role: admin
+      allowExecution: true
+
+---
+kind: Command
+version: v1
+definition:
+  name: delete_todos
+  arguments:
+    - name: todo_id
+      type: String
+  outputType: String
+  source:
+    dataConnectorName: ts_connector
+    dataConnectorCommand:
+      procedure: delete_todos
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: delete_todos
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: delete_todos
+  permissions:
+    - role: admin
+      allowExecution: true
